@@ -1,0 +1,75 @@
+An initiator  is created.
+
+POST URL 
+http://localhost:8088/users/create
+
+RequestBody JSON
+	{ 
+  "username": "anamika"
+ 
+    }
+-----------------------------------------------	
+A user can initiate a session 
+
+POST URL 
+http://localhost:8088/sessions/create
+
+RequestBody JSON
+	{ 
+  "id":5,
+  "username": "anamika"
+ 
+    }
+Session created with ID: 6	
+
+-----------------------------------------------
+A user can invite others to join it with below link
+
+
+POST URL 	
+http://localhost:8088/sessions/6/join
+	
+	RequestBody JSON
+	{   "id":3,
+		"username": "preethi"
+ 
+    }
+	
+User preethi joined session 6	
+-----------------------------------------------
+Other users who have joined the session may submit a restaurant of their choice.
+
+POST URL 
+http://localhost:8088/restaurants/sessions/6/submit
+
+
+RequestBody JSON
+	{
+	  "name":"sakunthalas",
+	  "address": "CBP",
+      "cuisine": "Sakunthalas"
+    }
+-----------------------------------------------	
+All users in the session are able to see restaurants that others have submitted
+
+GET URL 
+http://localhost:8088/restaurants/sessions/6/get
+	
+	
+-----------------------------------------------	
+The user who initiated the session is able to end the session.
+
+
+POST URL 
+http://localhost:8088/sessions/6/end
+RequestHeader userId=5
+
+Session ended
+----------------------------------------
+
+At the end of a session, a restaurant is randomly picked from all submitted
+restaurants. All users in the session are then able to see the picked
+restaurant.
+
+GET URL 
+http://localhost:8088/restaurants/sessions/7/pickrestaurant
